@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于知识图谱的无人驾驶领域可视化及问答系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.jpg">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/tags.js"></script>
+
+
+
+    <!--=================================================-->
+
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <style>
+    #tagsList {position:relative; width:250px; height:250px; }
+    #tagsList a {position:absolute; top:10px; left:10px; font-family:"SimHei"; color:black; font-weight:lighter; text-decoration:none; padding: 3px 6px; }
+    #tagsList a:hover { color:#249e92; letter-spacing:2px;}
+    #search:focus{
+    border: 1px solid #249e92;
+    }
+
+    .content-block {
+        display: block;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        margin-bottom: 20px; /* Add some space between the rows */
+        background-color: #f4f4f4; /* Light grey background */
+        padding: 15px; /* Padding around the content */
+        border: 1px solid #ddd; /* Light grey border */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        width: auto;
+        height: 300px;
+        overflow: auto; /* Hide scrollbar if content overflows */
+    }
+
+    .content-block img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px; /* Add some space between the image and the text */
+    }
+
+
+    /* 添加以下样式来修复模态框的显示和布局 */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        width: 1000px;
+        max-width: 90%; /* 限制模态框的最大宽度 */
+        height: 700px;
+        overflow: auto; /* 添加滚动条以支持内容过长时的滚动 */
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="{{ url_for('index') }}" class="navbar-brand">
+                        <img src="../static/images/logo.jpg" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text" style="font-size: 15px;">创新创业实践项目</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-view-list"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <h4>基于知识图谱的无人驾驶领域可视化及问答系统</h4>
+
+
+
+
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+            <!--CONTENT CONTAINER-->
+            <div id="content-container">
+                <!--Page content-->
+                <div id="page-content">
+                    <h1 class="text-main pad-btm bord-btm">相关实验典型案例</h1>
+                    <div class="overlay" id="overlay"></div>
+                    <!-- Rows of content modules -->
+                    <div class="row">
+                        <!-- Content Block 0 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/autodrive1.png" alt="内容图片1" onclick="openPopup('/detail-page-0')">
+                                <h4><a href="/detail-page-0">无人驾驶领域总述</a></h4>
+                                <p>走进无人驾驶，探秘人工智能</p>
+                            </div>
+                        </div>
+
+                        <!-- Content Block 1 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs1.png" alt="内容图片2" onclick="openPopup('/detail-page-1')">
+                                <h4><a href="/detail-page-1">认识无人驾驶车辆的传感器</a></h4>
+                                <p>不同传感器之间特性互补，共同为车辆探索外部环境。</p>
+                            </div>
+                        </div>
+
+                        <!-- Content Block 2 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs2.png" alt="内容图片3" onclick="openPopup('/detail-page-2')">
+                                <h4><a href="/detail-page-2">认识机器人操作系统</a></h4>
+                                <p>无人驾驶系统是一个集成了传感器、软件、算法的复杂计算机软硬件系统。操作系统是其中重要的系统软件程序。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Content Block 3 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs3.png" alt="内容图片4" onclick="openPopup('/detail-page-3')">
+                                <h4><a href="/detail-page-3">了解无人驾驶的车速预测</a></h4>
+                                <p>车辆行驶速度能够综合反映驾驶员行为、道路环境、道路设施对实际行车的影响.</p>
+                            </div>
+                        </div>
+                        <!-- Content Block 4 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                 <img src="../static/images/cs4.png" alt="内容图片5" onclick="openPopup('/detail-page-4')">
+                                <h4><a href="/detail-page-4">了解无人驾驶的路径规划</a></h4>
+                                <p>路径规划，是无人驾驶车辆实现决策的基础。</p>
+                            </div>
+                        </div>
+                        <!-- Content Block 5 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs5.png" alt="内容图片6" onclick="openPopup('./detail-page-5')">
+                                <h4><a href="/detail-page-5">了解无人驾驶的车辆控制</a></h4>
+                                <p>当我们驾驶一辆车在马路上行驶时，该如何保证车辆一直在车道内行驶呢?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Content Block 6 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs6.png" alt="内容图片7" onclick="openPopup('./detail-page-6')">
+                                <h4><a href="/detail-page-6">了解交通标志牌的图像识别</a></h4>
+                                <p>无人驾驶要安全上路，必须能对道路环境中的静态物体、动态物体、通行空间进行检测和识别。</p>
+                            </div>
+                        </div>
+                        <!-- Content Block 7 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs7.png" alt="内容图片8" onclick="openPopup('/detail-page-7')">
+                                <h4><a href="/detail-page-7">了解无人驾驶的高精度地图</a></h4>
+                                <p>在无人驾驶中，使用的不是传统的数字地图，而是高精度地图。它是专为无人驾驶而设计的精度更高、数据维度更多的数字地图。</p>
+                            </div>
+                        </div>
+
+                        <!-- Content Block 8 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs8.png" alt="内容图片9" onclick="openPopup('/detail-page-8')">
+                                <h4><a href="/detail-page-8">制作智能小车</a></h4>
+                                <p>了解了很多关于无人驾驶相关的算法，我们来通过自己动手制作一辆“小车”来感受一下驱动和控制的魅力</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Content Block 9 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/cs9.png" alt="内容图片10" onclick="openPopup('/detail-page-9')">
+                                <h4><a href="/detail-page-9">认识无人驾驶的虚拟仿真</a></h4>
+                                <p>为了汽车安全相关问题，相关研究者探索新的解决途径，希望能够将路测由实转虚，在虚拟的场景下开展“路测”，为无人驾驶汽车提供试错空间。</p>
+                            </div>
+                        </div>
+                        <!-- Content Block 10 -->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/autodrive3.png" alt="内容图片11" onclick="openPopup('/detail-page-10')">
+                                <h4><a href="detail-page-10.html">了解高铁轨道的智能运维</a></h4>
+                                <p>作为一个交通强国，中国铁路行业一直以来都是国家经济发展的重要支柱，高速铁路已经成为 备受关注的高效、快捷、安全和环保的交通工具。</p>
+                            </div>
+                        </div>
+                        <!-- Content Block 11-->
+                        <div class="col-lg-4">
+                            <div class="content-block">
+                                <img src="../static/images/bjtu.png" alt="内容图片11" onclick="openPopup('https://www.icourse163.org/course/NJTU-1450813184')">
+                                <h4><a href="https://www.icourse163.org/course/NJTU-1450813184">课程链接</a></h4>
+                                <p>更多学习内容，请前往北京交通大学慕课平台。</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <!-- Optional space for alignment or future content -->
+                        </div>
+                    </div>
+                </div>
+                <div class="popup" id="popup">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <iframe src="detail-page-1.html" frameborder="0" width="100%" height="100%" id="popupContent"></iframe>
+                </div>
+
+                <!-- End page content -->
+            </div>
+
+            <!-- END CONTENT CONTAINER -->
+
+
+
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content">
+
+                                <ul id="mainnav-menu" class="list-group">
+
+                                    <!--Category name-->
+						            <li class="list-header"> 知识关联可视化</li>
+
+                                    <!--Menu list item-->
+
+
+                                    <!--Menu list item-->
+                                   <li>
+                                        <a href="{{ url_for('search') }}">
+                                            <i class="fa fa-search" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <strong>知识关系检索</strong>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('get_all_graph') }}">
+                                            <i class="fa fa-pie-chart" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <strong>知识图谱全貌</strong>
+                                            </span>
+
+                                        </a>
+
+                                    </li>
+                                    <!--Menu list item-->
+
+
+						            <li class="list-divider"></li>
+
+						            <!--Category name-->
+						            <li class="list-header">问答系统</li>
+
+						            <!--Menu list item-->
+						            <li >
+						                <a href="{{ url_for('ADQA') }}">
+						                    <i class="fa fa-question-circle" style="width:24px"></i>
+						                    <span class="menu-title">知识关系问答</span>
+						                </a>
+						            </li>
+                                   <li class="list-header">相关教学</li>
+                                    <li >
+						                <a href="{{ url_for('stu_source') }}">
+						                    <i class="fa fa-question-circle" style="width:24px"></i>
+						                    <span class="menu-title">校内资源访问</span>
+						                </a>
+						            </li>
+						                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+           <p class="pad-lft">Copyright&#0169; 创新创业实践项目  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+    <!-- END OF CONTAINER -->
+<script>
+function openPopup(pageUrl) {
+    // 显示遮罩层
+    document.getElementById("overlay").style.display = "block";
+    // 设置弹出窗口的内容
+    document.getElementById("popupContent").src = pageUrl;
+    // 显示弹出窗口
+    document.getElementById("popup").style.display = "block";
+}
+
+// 关闭弹出窗口
+function closePopup() {
+    // 隐藏遮罩层
+    document.getElementById("overlay").style.display = "none";
+    // 隐藏弹出窗口
+    document.getElementById("popup").style.display = "none";
+}
+  span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // 当用户点击模态之外的任何地方时，关闭它
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
+</body>
+</html>

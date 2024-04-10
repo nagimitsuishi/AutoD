@@ -1,0 +1,520 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于知识图谱的无人驾驶领域可视化及问答系统</title>
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../static/images/logo.jpg">
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="../static/css/nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="../static/css/nifty-demo-icons.min.css" rel="stylesheet">
+    <link href="../static/css/nifty-demo.min.css" rel="stylesheet">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+        
+    
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="../static/css/pace.min.css" rel="stylesheet">
+   
+    <script src="../static/js/pace.min.js"></script>
+
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="../static/js/jquery-2.2.4.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="../static/js/nifty.min.js"></script>
+    <script src="../static/js/icons.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/tags.js"></script>
+
+
+
+    <!--=================================================-->
+    
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="../static/js/nifty-demo.min.js"></script>
+    <style type="text/css"> 
+    #tagsList {position:relative; width:250px; height:250px; }
+#tagsList a {position:absolute; top:0px; left:0px; font-family: Microsoft YaHei; color:gray; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+#tagsList a:hover { color:#249e92; letter-spacing:2px;}
+#search:focus{
+    border: 1px solid #249e92;
+}
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="{{ url_for('index') }}" class="navbar-brand">
+                        <img src="../static/images/logo.jpg" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text" style="font-size: 15px;">创新创业实践项目</span>
+                        </div>
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+
+
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-view-list"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-top-links pull-left">
+
+                        <h4>基于知识图谱的无人驾驶领域可视化及问答系统</h4>
+
+
+
+
+
+
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+
+					<h4 class="text-main pad-btm bord-btm">无人驾驶领域知识关联可视化</h4>
+
+              <div class="row">
+
+
+                <div class="col-lg-6">
+
+
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4">
+                        <div class="input-group" >
+                            <input type="text" id="search" class="form-control input-lg"  placeholder="请输入你要检索的关键字...">
+                            <span class="input-group-addon btn btn-mint"  onclick="search()">搜索</span>
+
+                        </div>
+                    </div>
+
+                    </div>
+                    <div class="row" style="height: 40px;"></div>
+                     <div class="row" >
+                        <div class="col-lg-8" style="height: 600px;" id="guanxi">
+
+
+                    </div>
+                    <div class="col-lg-2"></div>`
+                    <div  class="col-lg-4" id="tagsList">
+                    <a href="#" data="标准" >标准</a>
+                    <a href="#" data="车辆">车辆</a>
+                    <a href="#" data="处理器">处理器</a>
+                    <a href="#" data="传感器">传感器</a>
+                    <a href="#" data="供应商">供应商</a>
+                    <a href="#" data="机构">机构</a>
+                    <a href="#" data="路况">路况</a>
+                    <a href="#" data="企业">企业</a>
+                    <a href="#" data="算法">算法</a>
+                    <a href="#" data="系统">系统</a>
+                    <a href="#" data="技术" >技术</a>
+                    <a href="#" data="处理器">处理器</a>
+                    <a href="#" data="传感器">传感器</a>
+                    <a href="#" data="供应商">供应商</a>
+                    <a href="#" data="机构">机构</a>
+                    <a href="#" data="路况">路况</a>
+                    <a href="#" data="企业">企业</a>
+                    <a href="#" data="算法">算法</a>
+                    <a href="#" data="系统">系统</a>
+                    <a href="#" data="传感器">传感器</a>
+                    </div>
+                    </div>
+
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content">
+
+                                <ul id="mainnav-menu" class="list-group">
+
+
+
+                                    <!--Category name-->
+						            <li class="list-header"> 知识关联可视化</li>
+
+                                    <!--Menu list item-->
+
+
+                                    <!--Menu list item-->
+                                   <li>
+                                        <a href="{{ url_for('search') }}">
+                                            <i class="fa fa-search" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <strong>知识关系检索</strong>
+                                            </span>
+
+                                        </a>
+
+
+                                    </li>
+                                    <li>
+                                        <a href="{{ url_for('get_all_graph') }}">
+                                            <i class="fa fa-pie-chart" style="width:24px"></i>
+                                            <span class="menu-title">
+                                                <strong>知识图谱全貌</strong>
+                                            </span>
+
+                                        </a>
+
+                                    </li>
+                                    <!--Menu list item-->
+
+
+
+						            <li class="list-divider"></li>
+
+						            <!--Category name-->
+						            <li class="list-header">问答系统</li>
+
+						            <!--Menu list item-->
+						            <li >
+						                <a href="{{ url_for('ADQA') }}">
+						                    <i class="fa fa-question-circle" style="width:24px"></i>
+						                    <span class="menu-title">知识关系问答</span>
+
+						                </a>
+
+
+						            </li>
+                                    <li class="list-header">相关教学</li>
+                                    <li >
+						                <a href="{{ url_for('stu_source') }}">
+						                    <i class="fa fa-pie-chart" style="width:24px"></i>
+						                    <span class="menu-title">校内资源访问</span>
+						                </a>
+						            </li>
+						
+						                                    </ul>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+           <p class="pad-lft">Copyright&#0169; 创新创业实践项目  &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All Rights Reserved </p>
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+    <script type="text/javascript">
+    $(document).keypress(function (e) {
+        // 回车键事件
+        if (e.which == 13) {
+            search();
+        }
+    });
+    window.onresize = function () {
+
+        myChart.resize();
+    }
+
+    $.ajaxSetup({ async: false });
+    var myChart = echarts.init(document.getElementById("guanxi"));
+    myChart.showLoading();
+
+    myChart.hideLoading();
+    option = {
+        // backgroundColor: "white",
+        title: {
+            text: '无人驾驶知识检索',
+            textStyle: {
+                // color: "white",
+                fontWeight: "lighter",
+            }
+        },
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        legend: {
+            x: "center",
+            show: true,
+            data: []
+        },
+        series: [
+            {
+                type: 'graph',
+                layout: 'force',
+                symbolSize: 50,
+                edgeSymbol: ['circle', 'arrow'],
+                edgeSymbolSize: [4, 4],
+                edgeLabel: {
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 10
+                        },
+                        formatter: "{c}"
+                    }
+                },
+                force: {
+                    repulsion: 2500,
+                    edgeLength: [10, 100]
+                },
+                focusNodeAdjacency: true,
+                draggable: true,
+                roam: true,
+                categories: [],
+                label: {
+                    normal: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 10
+                        },
+                    }
+                },
+                force: {
+                    repulsion: 1000
+                },
+                tooltip: {
+                    formatter: function (node) { // 区分连线和节点，节点上额外显示其他数字
+                        if (!node.value) {
+                            return node.data.name;
+                        } else {
+                            return node.data.name + ":" + node.data.showNum;
+                        }
+                    },
+                },
+                lineStyle: {
+                    normal: {
+                        opacity: 0.9,
+                        width: 1,
+                        curveness: 0.3
+                    }
+                },
+                // progressiveThreshold: 700,
+                nodes: [],
+                links: [],
+
+
+
+            }
+        ]
+    };
+function search() {
+    var name = $("#search").val();
+
+    // 设置图谱的 legend 和 categories
+    var legendData, categories;
+    if (name === '车辆') {
+    legendData = ["车辆名称", "制造商", "车辆型号", "首产时间", "特征说明"];
+    categories = [
+        { name: '车辆名称' },
+        { name: '制造商' },
+        { name: '车辆型号' },
+        { name: '首产时间' },
+        { name: '特征说明' }
+    ];
+} else if (name === '系统') {
+    legendData = ["系统名称", "首发时间", "所属品牌", "系统特征"];
+    categories = [
+        { name: '系统名称' },
+        { name: '首发时间' },
+        { name: '所属品牌' },
+        { name: '系统特征' }
+    ];
+} else if (name === '企业') {
+    legendData = ["企业名称", "成立时间", "法定代表人", "企业类型", "总部地址"];
+    categories = [
+        { name: '企业名称' },
+        { name: '成立时间' },
+        { name: '法定代表人' },
+        { name: '企业类型' },
+        { name: '总部地址' }
+    ];
+} else if (name === '传感器') {
+    legendData = ["传感器名称", "传感器类型", "搭载位置", "输出信号"];
+    categories = [
+        { name: '传感器名称' },
+        { name: '传感器类型' },
+        { name: '搭载位置' },
+        { name: '输出信号' }
+    ];
+} else if (name === '供应商') {
+    legendData = ["供应商名称", "经营范围", "市场地位", "品质标准", "信用等级"];
+    categories = [
+        { name: '供应商名称' },
+        { name: '经营范围' },
+        { name: '市场地位' },
+        { name: '品质标准' },
+        { name: '信用等级' }
+    ];
+} else if (name === '处理器') {
+    legendData = ["处理器名称", "核心数", "线程数", "时钟速度", "缓存大小", "能耗"];
+    categories = [
+        { name: '处理器名称' },
+        { name: '核心数' },
+        { name: '线程数' },
+        { name: '时钟速度' },
+        { name: '缓存大小' },
+        { name: '能耗' }
+    ];
+} else if (name === '技术') {
+    legendData = ["技术名称", "技术类型", "技术特性", "技术优势", "技术局限性"];
+    categories = [
+        { name: '技术名称' },
+        { name: '技术类型' },
+        { name: '技术特性' },
+        { name: '技术优势' },
+        { name: '技术局限性' }
+    ];
+} else if (name === '机构') {
+    legendData = ["机构名称", "机构类型", "职能"];
+    categories = [
+        { name: '机构名称' },
+        { name: '机构类型' },
+        { name: '职能' }
+    ];
+} else if (name === '标准') {
+    legendData = ["标准名称", "实施时间"];
+    categories = [
+        { name: '标准名称' },
+        { name: '实施时间' }
+    ];
+} else if (name === '算法') {
+    legendData = ["算法名称", "算法类型", "算法功能", "实现方式", "应用场景"];
+    categories = [
+        { name: '算法名称' },
+        { name: '算法类型' },
+        { name: '算法功能' },
+        { name: '实现方式' },
+        { name: '应用场景' }
+    ];
+} else if (name === '路况') {
+    legendData = ["路况类型", "路况描述", "易发时间"];
+    categories = [
+        { name: '路况类型' },
+        { name: '路况描述' },
+        { name: '易发时间' }
+    ];
+}
+
+
+    $.getJSON('/search_name', { name: name }, function (json) {
+        console.log("Received response:", json);
+
+        option.series[0].nodes = json.data.map(function (node, idx) {
+            node.id = idx;
+            console.log("Processing node:", node); // 查看每个节点的处理情况
+            return node;
+        });
+
+        option.series[0].links = json.links;
+        option.legend.data = legendData;
+        option.series[0].categories = categories;
+
+        console.log("Processed nodes:", option.series[0].nodes); // 查看所有处理过的节点数据
+        console.log("Links:", option.series[0].links); // 查看链接数据
+
+        myChart.setOption(option, true);
+    });
+}
+
+
+    $(".col-lg-4 a").click(function () {
+    var clickedName = $(this).attr("data");
+    $("#search").val(clickedName);  // 将搜索框的值设置为点击的分类
+    search();  // 调用搜索函数
+});
+</script>
+</body>
+</html>
